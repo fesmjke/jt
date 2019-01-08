@@ -1,0 +1,8 @@
+doctype html
+html(lang="en")
+  head
+    title= pageTitle
+  body
+    ul
+        each val in users.length ? users : ['There are no values']
+            li= val.firstName + " " + val.lastName

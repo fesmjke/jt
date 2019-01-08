@@ -1,0 +1,17 @@
+doctype html
+html(lang="en")
+  head
+    title= pageTitle
+  body
+    h1 Pug - node template engine
+    #container.col
+        p You are amazing!
+        p.
+            Pug is a terse and simple templating language with a
+            strong focus on performance and powerful features.
+        div Hello,Its ME!
+    form(action="index", method="post")
+        input(type="text", name="firstName")
+        br
+        input(type="text", name="lastName")
+        input(type="submit", value="okay")
