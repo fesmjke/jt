@@ -1,5 +1,8 @@
-include layout/header
-body
+doctype html
+html(lang="en")
+  head
+    title= pageTitle
+  body
     h1 Pug - node template engine
     #container.col
         p You are amazing!
@@ -12,4 +15,3 @@ body
         br
         input(type="text", name="lastName")
         input(type="submit", value="okay")
-include layout/footer

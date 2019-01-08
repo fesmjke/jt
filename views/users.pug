@@ -1,6 +1,8 @@
-include layout/header
-body
-  ul.list-group
-    each val in users.length ? users : ['There are no values']
-      li.list-group-item= val.firstName + " " + val.lastName
-  include layout/footer
+doctype html
+html(lang="en")
+  head
+    title= pageTitle
+  body
+    ul
+        each val in users.length ? users : ['There are no values']
+            li= val.firstName + " " + val.lastName
