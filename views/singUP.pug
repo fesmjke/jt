@@ -1,0 +1,29 @@
+include layout/header
+body
+include layout/navigation
+h1.container="Registration page"
+form.container.h5
+    div.dropdown-divider
+    div.form-row
+        div.form-group.col-md-3
+            label(for="inputFirst4")="First name"
+            input(type="text",placeholder="First name").form-control
+        div.form-group.col-md-3
+            label(for="inputFirst4")="Last name"
+            input(type="text",placeholder="Last name").form-control
+        div.form-group.col-md-2
+            label(for="inputCity")="City"
+            input(type="text",placeholder="City").form-control#inputCity
+        div.form-group.col-md-4
+            label(for="inputEmail4")="Email"
+            input(type="email",placeholder="email@example.com").form-control#inputEmail4
+        div.form-group.col-md-4
+            label(for="inputPassword4")="Password"
+            input(type="password",placeholder="Password",aria-describedby="passwordHelpBlock").form-control#inputPassword4
+            small#passwordHelpBlock.form-text.text-muted="Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji."
+
+    button(type="submit").btn.btn-primary="Submit"
+    div.dropdown-divider
+    a(href="/dev/l").dropdown-item="Already been here? Sign in"
+    
+include layout/footer
