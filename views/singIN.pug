@@ -1,0 +1,18 @@
+include layout/header
+body
+include layout/navigation
+h1.container="Login page"
+div.container.h5
+    div.dropdown-divider
+    form.px-4.py-4
+        div.form-group
+            label(for="exampleDropdownFormEmail1")="Email address"
+            input(type="email",placeholder="email@example.com",style="width: 300px;").form-control#exampleDropdownFormEmail1
+        div.form-group
+            label(for="exampleDropdownFormPassword1")="Password"
+            input(type="password",placeholder="Password",style="width: 300px;").form-control#exampleDropdownFormPassword1
+        button(type="submit").btn.btn-primary="Sing in"
+    div.dropdown-divider
+    a(href="/dev/r").dropdown-item="New around here? Sign up"
+include layout/footer
+
