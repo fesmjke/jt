@@ -2,8 +2,8 @@ include layout/header
 body
 include layout/navigation
 h1.container="Registration page"
+div.dropdown-divider
 form.container.h5
-    div.dropdown-divider
     div.form-row
         div.form-group.col-md-3
             label(for="inputFirst4")="First name"
@@ -24,6 +24,5 @@ form.container.h5
 
     button(type="submit").btn.btn-primary="Submit"
     div.dropdown-divider
-    a(href="/dev/l").dropdown-item="Already been here? Sign in"
-    
+    a(href="/dev/l").dropdown-item="Already been here? Sign in"  
 include layout/footer
