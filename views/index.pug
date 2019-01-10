@@ -1,16 +1,8 @@
 include layout/header
 body
-    h1 Pug - node template engine
-    #container.col
-        p You are amazing!
-        p.
-            Pug is a terse and simple templating language with a
-            strong focus on performance and powerful features.
-        div Hello,Its ME!
+include layout/navigation
+div.jumbotron.jumbotron-fluid
     div.container
-        form(action="index", method="post")
-            input(type="text", name="firstName")
-            br
-            input(type="text", name="lastName")
-            input(type="submit", value="okay")
-    include layout/footer
+        h1.display-4="This is my project"
+        p.lead="This is a modified jumbotron that occupies the entire horizontal space of its parent."
+include layout/footer
