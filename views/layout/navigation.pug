@@ -1,0 +1,29 @@
+nav.navbar.navbar-expand-lg.navbar-light.bg-light.sticky-top
+    a(href="#").navbar-brand
+        img(src="/images/JT_logo.svg",width="30",height="30",alt="")
+        =""
+    button.navbar-toggler(type="button",data-toggle="collapse",data-target="#navbarSupportedContent",aria-controls="navbarSupportedContent",aria-expanded="false",aria-label="Toggle navigation")
+        span.navbar-toggler-icon
+    div.collapse.navbar-collapse#navbarSupportedContent
+        ul.navbar-nav.mr-auto
+            li.nav-item.active
+                a(href="#").nav-link="Home"
+                    span.sr-only="(current)"
+            li.nav-item
+                a(href="#").nav-link="Link"
+            li.nav-item.dropdown
+                a(href="#",role="button",data-toggle="dropdown",aria-haspopup="true",aria-expanded="false").nav-link.dropdown-toggle#navbarDropdown="Dropdown"
+                div(aria-labelledby="navbarDropdown").dropdown-menu
+                    a(href="#").dropdown-item="Action"
+                    div.dropdown-divider
+                    a(href="#").dropdown-item="Another action"
+                    div.dropdown-divider
+                    a(href="#").dropdown-item="Something else here"
+            li.nav-item
+                a(href="#",tabindex="-1",aria-disabled="true").nav-link="disabled"
+            form.form-inline.my-2.my-lg-0
+                input(type="search",placeholder="Search",aria-label="Search").form-control.mr-sm-2
+                button(type="submit").btn.btn-outline-success.my-2.my-sm-0.bg-dark="Search"
+        form.form-inline
+            a(type="button",href="/dev/l").btn.btn-outline-success.bg-dark="Sing IN"
+            a(type="button",href="/dev/r").btn.btn-outline-success.bg-dark="Sing UP"
