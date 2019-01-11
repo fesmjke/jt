@@ -3,26 +3,42 @@ body
 include layout/navigation
 h1.container="Registration page"
 div.dropdown-divider
-form.container.h5
+form(method="post").container.h5
     div.form-row
         div.form-group.col-md-3
-            label(for="inputFirst4")="First name"
-            input(type="text",name="upFirstName",placeholder="First name").form-control
+            label(for="validationServer01")="First name"
+            input(type="text",name="upFirstName",placeholder="First name",required).form-control
         div.form-group.col-md-3
             label(for="inputFirst4")="Last name"
-            input(type="text",name="upLastName",placeholder="Last name").form-control
-        div.form-group.col-md-3
-            label(for="inputCity")="City"
-            input(type="text",name="upCity",placeholder="City").form-control#inputCity
+            input(type="text",name="upLastName",placeholder="Last name",required).form-control
         div.form-group.col-md-4
             label(for="inputEmail4")="Email"
-            input(type="email",name="upEmail",placeholder="email@example.com").form-control#inputEmail4
+            input(type="email",name="upEmail",placeholder="email@example.com",required).form-control#inputEmail4
             small#passwordHelpBlock.form-text.text-muted="Enter your active email."
         div.form-group.col-md-3
             label(for="inputPassword4")="Password"
-            input(type="password",name="upPassword",placeholder="Password",aria-describedby="passwordHelpBlock").form-control#inputPassword4
-            small#passwordHelpBlock.form-text.text-muted="Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji."
+            input(type="password",name="upPassword",placeholder="Password",aria-describedby="passwordHelpBlock",required).form-control#inputPassword4
+            small#passwordHelpBlock.form-text.text-muted="Your password must be 6-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji."
+        div.form-group.col-md-3 
+            label(for="inputPassword4")="Confirm Password"
+            input(type="password",name="upConfirmPassword",placeholder="Type password again",aria-describedby="passwordHelpBlock",required).form-control#inputPassword3
+            small#passwordHelpBlock.form-text.text-muted="Please enter password again"
+    case st
+        when true
+            div(role="alert").alert.alert-success
+                h4.alert-heading="Well done!"
+                p="Aww yeah, you successfully registered!"
+                hr
+                p.mb-0="Our congratulations"
+        when false
+            div(role="alert").alert.alert-danger
+                h4.alert-heading="Oopps..."
+                h5.text-muted="Seemeth like something went wrong"
+                p=error
+                hr
+                p.mb-0="Please try again"     
     button(type="submit").btn.btn-primary="Submit"
     div.dropdown-divider
-    a(href="/l").dropdown-item="Already been here? Sign in"  
+    a(href="/l").dropdown-item="Already been here? Sign in"
 include layout/footer
+
