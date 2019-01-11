@@ -1,0 +1,13 @@
+include layout/header
+
+div.jumbotron
+    h1.display-4="Oops..."
+        p.text-muted=error.message+" "+error.status
+    p.lead="Seemeth like something went wrong"
+    hr.my-4
+    p.text-muted="You can return to main page right here"
+    a(href="/",role="button").btn.btn-primary.btn-lg="To main page"
+
+include layout/footer
+
+
