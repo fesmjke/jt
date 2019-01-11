@@ -40,22 +40,25 @@ app.post("/r", (req, res) => {
       st: false,
       error: "Passwords do not match!"
     });
-  } else if(u.upPassword.length < 6){
-    res.render("SingUP",{
-      st:false,
-      error:"Make sure it's at least 6 characters"
-    })
-  }
-  else if (u.upEmail.length < 9 || u.upEmail.length > 20) {
+  } else if (u.upPassword.length < 6) {
+    res.render("SingUP", {
+      st: false,
+      error: "Make sure it's at least 6 characters"
+    });
+  } else if (u.upEmail.length < 9 || u.upEmail.length > 20) {
     res.render("singUP", {
       st: false,
       error: "Login length is from 9 to 20 characters!"
     });
-  }else if(!/^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/.test(u.upEmail)){
-    res.render("singUP",{
-      st:false,
-      error:"Email may only contain alphanumeric characters"
-    })
+  } else if (
+    !/^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/.test(
+      u.upEmail
+    )
+  ) {
+    res.render("singUP", {
+      st: false,
+      error: "Email may only contain alphanumeric characters"
+    });
   } else {
     models.User.findOne({
       email: login
@@ -92,6 +95,64 @@ app.post("/r", (req, res) => {
   }
 });
 
+app.post("/l", (req, res) => {
+  let u = req.body;
+  const login = req.body.inEmail;
+  const pass = req.body.inPassword;
+  if (u.inPassword.length < 6) {
+    res.render("singIN", {
+      st: false,
+      error: "Make sure password at least 6 characters"
+    });
+  } else if (u.inEmail.length < 9) {
+    res.render("singIN", {
+      st: false,
+      error: "Login length is less then 9 characters!"
+    });
+  } else if (
+    !/^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/.test(
+      u.inEmail
+    )
+  ) {
+    res.render("singIN", {
+      st: false,
+      error: "Email may only contain alphanumeric characters"
+    });
+  } else {
+    models.User.findOne({
+      email:login
+    })
+      .then(user => {
+        if (!user) {
+          res.render("singIN", {
+            st: false,
+            error: "Password and Email is incorrect"
+          });
+        } else {
+          bcrypt.compare(pass, user.password, (err, result) => {
+            if(!result){
+              res.render("singIN", {
+                st: false,
+                error: "Password and Email is incorrect"
+              });
+            } else {
+              res.render("singIN", {
+                st: true
+              });
+            }
+          });
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        res.render("singIN", {
+          st: false,
+          error: "Error,try again later"
+        });
+      });
+  }
+});
+
 //catch errors
 app.use((req, res, next) => {
   const err = new Error("Not found!");
@@ -109,4 +170,3 @@ app.use((error, req, res, next) => {
 });
 
 module.exports = app;
-
