@@ -9,6 +9,7 @@ const app = express();
 
 
 // sets and uses
+
 app.set("view engine", "pug");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
@@ -31,12 +32,20 @@ app.get("/r", (req, res) => {
   res.render("singUP");
 });
 
-//catch 404
+//catch errors
 app.use((req,res,next)=>{
   const err = new Error('Not found!');
   err.status = 404;
   next(err);
-  res.render('error404')
+});
+
+app.use((error,req,res,next) =>{
+  res.status(error.status  || 500)
+  res.render('error',{
+    message: error.message,
+    status: error.status,
+    error: !config.IS_PRODUCTION ? error : {},
+  });
 });
 
 
