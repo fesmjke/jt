@@ -4,14 +4,28 @@ include layout/navigation
 h1.container="Login page"
 div.dropdown-divider
 div.container.h5
-    form.px-4.py-4
+    form(method="post").px-4.py-4
         div.form-group
             label(for="exampleDropdownFormEmail1")="Email address"
-            input(type="email",name="inEmail",placeholder="email@example.com",style="width: 300px;").form-control#exampleDropdownFormEmail1
+            input(type="email",name="inEmail",required,placeholder="email@example.com",style="width: 300px;").form-control#exampleDropdownFormEmail1
         div.form-group
             label(for="exampleDropdownFormPassword1")="Password"
-            input(type="password",name="inPassword",placeholder="Password",style="width: 300px;").form-control#exampleDropdownFormPassword1
+            input(type="password",name="inPassword",required,placeholder="Password",style="width: 300px;").form-control#exampleDropdownFormPassword1
         button(type="submit").btn.btn-primary="Sing in"
+    case st
+        when true
+            div(role="alert").alert.alert-success
+                h4.alert-heading="Well done!"
+                p="Aww yeah, you successfully log in!"
+                hr
+                p.mb-0="Our congratulations"
+        when false
+            div(role="alert").alert.alert-danger
+                h4.alert-heading="Oopps..."
+                h5.text-muted="Seemeth like something went wrong"
+                p=error
+                hr
+                p.mb-0="Please try again"
     div.dropdown-divider
     a(href="/r").dropdown-item="New around here? Sign up"
 include layout/footer
