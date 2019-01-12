@@ -19,11 +19,12 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light.sticky-top
                     a(href="#").dropdown-item="Another action"
                     div.dropdown-divider
                     a(href="#").dropdown-item="Something else here"
-            li.nav-item
-                a(href="#",tabindex="-1",aria-disabled="true").nav-link="disabled"
             form.form-inline.my-2.my-lg-0
                 input(type="search",placeholder="Search",aria-label="Search").form-control.mr-sm-2
                 button(type="submit").btn.btn-outline-success.my-2.my-sm-0.bg-dark="Search"
         form.form-inline
-            a(type="button",href="/l").btn.btn-outline-success.bg-dark="Sing IN"
-            a(type="button",href="/r").btn.btn-outline-success.bg-dark="Sing UP"
+            unless user
+                a(type="button",href="/login").btn.btn-outline-success.bg-dark="Sing IN"
+                a(type="button",href="/registration").btn.btn-outline-success.bg-dark="Sing UP"
+            else
+                a(type="button",href="/logout").btn.btn-outline-success.bg-dark="logout"

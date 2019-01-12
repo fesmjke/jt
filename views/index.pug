@@ -5,4 +5,10 @@ div.jumbotron.jumbotron-fluid
     div.container
         h1.display-4="This is my project"
         p.lead="This is a modified jumbotron that occupies the entire horizontal space of its parent."
+
+div.container
+    unless user
+        h2=""
+    else
+        h2=user.name
 include layout/footer
