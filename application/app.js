@@ -5,8 +5,24 @@ const bodyParser = require("body-parser");
 const models = require("../models");
 const path = require("path");
 const bcrypt = require("bcrypt-nodejs");
+const session = require("express-session");
+const mongoose = require("mongoose")
+const MongoStore = require("connect-mongo")(session);
 
 const app = express();
+
+// Session settings
+app.use(
+  session({
+    secret: config.SESSION_SECRET,
+    resave: true,
+    saveUninitialized: false,
+    store: new MongoStore({
+      moongooseConnection: mongoose.connection,
+      url: 'mongodb://localhost:27017/WebSite'
+    })
+  })
+);
 
 // sets and uses
 
@@ -16,22 +32,42 @@ app.use(express.static("public"));
 
 // routers
 app.get("/", (req, res) => {
-  res.render("index");
+  const id = req.session.userId;
+  const email = req.session.userLogin;
+  var name = "";
+  models.User.findById(id).then(user => {
+    
+    if(user){
+    console.log(user);
+    name = user.firstName;
+    console.log("sended");
+    res.render("index",{user:{
+      id,
+      email,
+      name
+    }});
+    }else{
+      res.render("index",{});
+    }
+  }).catch(err => {
+    console.log(err);
+    res.render("index");
+  });
 });
 
 app.get("/dev/c", (req, res) => {
   res.render("layout/carousel");
 });
 
-app.get("/l", (req, res) => {
+app.get("/login", (req, res) => {
   res.render("singIN");
 });
 
-app.get("/r", (req, res) => {
+app.get("/registration", (req, res) => {
   res.render("singUP");
 });
 
-app.post("/r", (req, res) => {
+app.post("/registration", (req, res) => {
   let u = req.body;
   const login = req.body.upEmail;
   const pass = req.body.upPassword;
@@ -95,7 +131,7 @@ app.post("/r", (req, res) => {
   }
 });
 
-app.post("/l", (req, res) => {
+app.post("/login", (req, res) => {
   let u = req.body;
   const login = req.body.inEmail;
   const pass = req.body.inPassword;
@@ -120,7 +156,7 @@ app.post("/l", (req, res) => {
     });
   } else {
     models.User.findOne({
-      email:login
+      email: login
     })
       .then(user => {
         if (!user) {
@@ -130,15 +166,15 @@ app.post("/l", (req, res) => {
           });
         } else {
           bcrypt.compare(pass, user.password, (err, result) => {
-            if(!result){
+            if (!result) {
               res.render("singIN", {
                 st: false,
                 error: "Password and Email is incorrect"
               });
             } else {
-              res.render("singIN", {
-                st: true
-              });
+              req.session.userId = user.id;
+              req.session.userLogin = user.email;
+              res.redirect("/");
             }
           });
         }
