@@ -1,0 +1,29 @@
+include ../layout/header
+include ../layout/navigation
+div.jumbotron.jumbotron-fluid
+    div.container
+        h1.display-4="New post"
+        p.lead="Here you can add new post"
+
+div.editor
+    p="hello quill"
+
+div
+    form(method="post")
+        div.input-group.mb-3.col-md-4
+            div.input-group-prepend
+                span.input-group-text#basic-addon1
+                    i.fas.fa-sm.fa-signature
+            input(type="text",placeholder="title",name="addTitle",aria-label="tag",aria-describedby="basic-addon1").form-control
+        div.input-group.mb-3.col-md-4
+            div.input-group-prepend
+                span.input-group-text#basic-addon1
+                    i.fas.fa-sm.fa-hashtag
+            input(type="text",placeholder="tag",name="addTag",aria-label="tag",aria-describedby="basic-addon1").form-control
+        div.input-group.mb-3.col-md-4
+            div.input-group-prepend
+                span.input-group-text="Text"
+            textarea(aria-label="Text area",name="addText",cols="30",rows="5",placeholder="Post text").form-control
+        div.input-group.col-md-4.justify-content-end
+            button(type="submit").btn.btn-primary.my-1="Publish post"
+include ../layout/footer
