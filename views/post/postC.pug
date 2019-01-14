@@ -1,0 +1,14 @@
+include ../layout/header
+include ../layout/navigation
+div.jumbotron.jumbotron-fluid.mb-0
+    div.container
+        h1.display-4=p.title
+        ul.list-group
+            li.list-group-item.h3="Post tag: "+p.tag
+            
+            li.list-group-item.h3="Post text:"
+                p.font-weight-normal=p.text
+
+            li.list-group-item.h3="Post create: "+p.createdAt
+include ../layout/footer
+
