@@ -12,6 +12,12 @@ const user = new Schema({
     type: String,
     required: true
   },
+  nickname :{
+    type:String,
+    required:true,
+    unique: true,
+    sparse: true
+  },
   firstName: {
     type: String,
     required: true
@@ -20,6 +26,9 @@ const user = new Schema({
     type: String,
     required: true
   }
+},
+{
+  timestamps:true
 });
 
 user.set('toJSON',{
