@@ -4,26 +4,37 @@ div.jumbotron.jumbotron-fluid
     div.container
         h1.display-4="New post"
         p.lead="Here you can add new post"
-
-div.editor
-    p="hello quill"
-
 div
     form(method="post")
         div.input-group.mb-3.col-md-4
             div.input-group-prepend
                 span.input-group-text#basic-addon1
                     i.fas.fa-sm.fa-signature
-            input(type="text",placeholder="title",name="addTitle",aria-label="tag",aria-describedby="basic-addon1").form-control
+            input(type="text",placeholder="title",required,name="addTitle",aria-label="tag",aria-describedby="basic-addon1").form-control
         div.input-group.mb-3.col-md-4
             div.input-group-prepend
                 span.input-group-text#basic-addon1
                     i.fas.fa-sm.fa-hashtag
-            input(type="text",placeholder="tag",name="addTag",aria-label="tag",aria-describedby="basic-addon1").form-control
+            input(type="text",placeholder="tag",required,name="addTag",aria-label="tag",aria-describedby="basic-addon1").form-control
         div.input-group.mb-3.col-md-4
             div.input-group-prepend
                 span.input-group-text="Text"
-            textarea(aria-label="Text area",name="addText",cols="30",rows="5",placeholder="Post text").form-control
+            textarea(aria-label="Text area",required,name="addText",cols="30",rows="5",placeholder="Post text").form-control
         div.input-group.col-md-4.justify-content-end
             button(type="submit").btn.btn-primary.my-1="Publish post"
+        div.container
+            case st
+                when true
+                    div(role="alert").alert.alert-success
+                        h4.alert-heading="Well done!"
+                        p="Aww yeah, you successfully add new post!"
+                        hr
+                        p.mb-0="Our congratulations"
+                when false
+                    div(role="alert").alert.alert-danger
+                        h4.alert-heading="Oopps..."
+                        h5.text-muted="Seemeth like something went wrong"
+                        p=error
+                        hr
+                        p.mb-0="Please try again"
 include ../layout/footer
