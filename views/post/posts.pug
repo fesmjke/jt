@@ -1,0 +1,25 @@
+include ../layout/header
+include ../layout/navigation
+div.jumbotron.jumbotron-fluid.mb-0
+    div.container
+        h1.display-4="Posts"
+        p.lead="Here you look for posts"
+div.album.py-5.bg-light
+    div.container
+        div.row
+                each val,index in p
+                    div.col-md-4
+                        div.card.mb-4.shadow-sm
+                            img(src="...").card-img-top
+                            div.card-body
+                                h5.card-title=val.title
+                                p.card-text=val.text
+                                a(href="/post/cpost/"+val.url).btn.btn-primary="Go deep"
+                            ul.list-group.list-group-flush
+                                li.list-group-item=val.tag
+                                
+                            
+include ../layout/footer
+
+
+<a href="#" class="btn btn-primary">Go somewhere</a>
