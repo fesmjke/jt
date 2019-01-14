@@ -28,10 +28,13 @@ router.post("/registration", (req, res) => {
       st: false,
       error: "Login length is from 9 to 20 characters!"
     });
+  } else if(u.upNickName.length < 2){
+    res.render("singUP",{
+      st:false,
+      error:"Nickname length is minimum 2 characters!"
+    });
   } else if (
-    !/^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/.test(
-      u.upEmail
-    )
+    !/^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/.test(u.upEmail)
   ) {
     res.render("singUP", {
       st: false,
@@ -46,6 +49,7 @@ router.post("/registration", (req, res) => {
           models.User.create({
             email: login,
             password: hash,
+            nickname : u.upNickName,
             firstName: u.upFirstName,
             lastName: u.upLastName
           })
