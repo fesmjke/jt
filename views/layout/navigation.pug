@@ -1,4 +1,4 @@
-nav.navbar.navbar-expand-lg.navbar-light.bg-light.sticky-top
+nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.sticky-top
     a(href="/").navbar-brand
         img(src="/images/JT_logo.svg",width="30",height="30",alt="")
         =""
@@ -11,20 +11,29 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light.sticky-top
                     span.sr-only="(current)"
             li.nav-item
                 a(href="#").nav-link="About"
-            li.nav-item.dropdown
-                a(href="#",role="button",data-toggle="dropdown",aria-haspopup="true",aria-expanded="false").nav-link.dropdown-toggle#navbarDropdown="List"
-                div(aria-labelledby="navbarDropdown").dropdown-menu
-                    a(href="#").dropdown-item="Profile"
-                    div.dropdown-divider
-                    a(href="/post/add").dropdown-item="Add post"
-                    //- div.dropdown-divider
-                    //- a(href="#").dropdown-item=""
+            if user
+                li.nav-item.dropdown
+                    a(href="#",role="button",data-toggle="dropdown",aria-haspopup="true",aria-expanded="false").nav-link.dropdown-toggle#navbarDropdown="List"
+                    div(aria-labelledby="navbarDropdown").dropdown-menu
+                        a(href="/post/posts").dropdown-item="Posts"
+                        div.dropdown-divider
+                        a(href="/post/add").dropdown-item="Add post"
+                        //- div.dropdown-divider
+                        //- a(href="#").dropdown-item=""
             form.form-inline.my-2.my-lg-0
                 input(type="search",placeholder="Search",aria-label="Search").form-control.mr-sm-2
                 button(type="submit").btn.btn-outline-success.my-2.my-sm-0.bg-dark="Search"
         form.form-inline
             unless user
-                a(type="button",href="/join/login").btn.btn-outline-success.bg-dark="Sing IN"
-                a(type="button",href="/join/registration").btn.btn-outline-success.bg-dark="Sing UP"
+                ul.nav.justify-content-end
+                    li.nav-item.m-1
+                        a(type="button",href="/join/login").btn.btn-outline-success.bg-dark="Sing IN"
+                    li.nav-item.m-1
+                        a(type="button",href="/join/registration").btn.btn-outline-success.bg-dark="Sing UP"
             else
-                a(type="button",href="/join/logout").btn.btn-outline-success.bg-dark="logout"
+                ul.nav.justify-content-end
+                    li.nav-item.m-1
+                        a.text-muted.btn.btn-outline-success.bg-dark=user.nk
+                    li.nav-item.m-1
+                        a(type="button",href="/join/logout").btn.btn-outline-success.bg-dark="logout"
+                         
