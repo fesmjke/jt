@@ -38,17 +38,17 @@ app.use("/post", routs.post);
 app.get("/", (req, res) => {
   const id = req.session.userId;
   const email = req.session.userLogin;
-  var name = "";
+  var nk = "";
   models.User.findById(id)
     .then(user => {
       if (user) {
-        name = user.firstName;
+        nk = user.nickname;
         console.log("sended");
         res.render("index", {
           user: {
             id,
             email,
-            name
+            nk
           }
         });
       } else {
