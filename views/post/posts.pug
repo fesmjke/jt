@@ -10,16 +10,19 @@ div.album.py-5.bg-light
                 each val,index in p
                     div.col-md-4
                         div.card.mb-4.shadow-sm
-                            img(src="...").card-img-top
+                            img(src="").card-img-top
                             div.card-body
                                 h5.card-title=val.title
                                 p.card-text=val.text
                                 a(href="/post/cpost/"+val.url).btn.btn-primary="Go deep"
                             ul.list-group.list-group-flush
-                                li.list-group-item=val.tag
-                                
-                            
+                                li.list-group-item="Post tag : "+val.tag
+                                each vl,dd in users
+                                    - let temp = vl._id.toString()===val.author.toString() ? vl.nickname : "anonymous"
+                                    if temp == "anonymous"
+                                        
+                                    else
+                                        li.list-group-item="Post author : "+temp
+                           
+                                                            
 include ../layout/footer
-
-
-<a href="#" class="btn btn-primary">Go somewhere</a>
