@@ -34,6 +34,7 @@ app.use(express.static("public"));
 // routers
 app.use("/join", routs.auth);
 app.use("/post", routs.post);
+app.use('/user', routs.user);
 
 app.get("/", (req, res) => {
   const id = req.session.userId;
