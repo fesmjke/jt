@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const models = require("../models");
-
+const mongoose = require("mongoose");
 // Get for add new post
 router.get("/add", (req, res) => {
   const userId = req.session.userId;
@@ -99,11 +99,22 @@ router.post("/add", (req, res) => {
 router.get("/posts", (req, res) => {
   const userId = req.session.userId;
   const userEmail = req.session.userLogin;
+  let nk = "";
+  let postAuthor = "";
+  models.User.findById(userId).then(user => {
+    nk = user.nickname;
+  });
 
   models.Post.find({}).then(posts => {
-    models.User.findById(userId).then(user => {
-      let p = posts;
-      res.render("post/posts", { p, user: { id: userId, nk: user.nickname } });
+    models.User.find({}).then(users => {
+      res.render("post/posts", {
+        p: posts,
+        user: {
+          nk,
+          userId
+        },
+        users
+      });
     });
   });
 });
@@ -112,6 +123,12 @@ router.get("/cpost/:post", (req, res, next) => {
   const url = req.params.post.trim().replace(/ +(?= )/g, "");
   const userId = req.session.userId;
   const userEmail = req.session.userLogin;
+  let nk = "";
+
+  models.User.findById(userId).then(user => {
+    nk = user.nickname;
+  });
+
   if (!url) {
     const err = new Error("Not found!");
     err.status = 404;
@@ -125,14 +142,14 @@ router.get("/cpost/:post", (req, res, next) => {
         err.status = 404;
         next(err);
       } else {
-        models.User.findById(userId).then(user => {
+        if (userId || userEmail) {
           res.render("post/postC", {
             p: post,
-            user: { id: userId, nk: user.nickname }
+            user: { id: userId, nk }
           });
-        }).catch(err => {
-          console.error(err);
-        });
+        } else {
+          res.redirect("/");
+        }
       }
     });
   }
