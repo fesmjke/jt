@@ -19,6 +19,10 @@ const post = new Schema(
     author: {
       type: Schema.Types.ObjectId,
       ref: "User"
+    },
+    image:{
+      type:Schema.Types.ObjectId,
+      ref: 'Image'
     }
   },
   {
