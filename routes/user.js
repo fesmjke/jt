@@ -16,13 +16,16 @@ router.get("/", (req, res) => {
           userToSend = user;
           models.Post.find({}).then(posts => {
             postsToSend = posts;
-            res.render("user/profile", {
-              p:postsToSend,
-              userToSend,
-              user: {
-                nk: user.nickname,
-                id: userId
-              }
+            models.Image.find({}).then(images =>{
+              res.render("user/profile", {
+                p:postsToSend,
+                userToSend,
+                user: {
+                  nk: user.nickname,
+                  id: userId
+                },
+                images
+              })
             });
           });
           
