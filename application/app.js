@@ -29,12 +29,14 @@ app.use(
 
 app.set("view engine", "pug");
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(express.static("public"));
-
+app.use('/uploads', express.static('uploads'));
 // routers
 app.use("/join", routs.auth);
 app.use("/post", routs.post);
-app.use('/user', routs.user);
+app.use("/user", routs.user);
+app.use("/upload", routs.upload);
 
 app.get("/", (req, res) => {
   const id = req.session.userId;
@@ -44,7 +46,6 @@ app.get("/", (req, res) => {
     .then(user => {
       if (user) {
         nk = user.nickname;
-        console.log("sended");
         res.render("index", {
           user: {
             id,
