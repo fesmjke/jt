@@ -1,13 +1,11 @@
 include ../layout/header
 include ../layout/navigation
-div.jumbotron
-    div.container
-        img(src="...", alt="image").rounded.float-left
-    div.container.mr-2
-        ul.list-group.list-group-flush
-            h4.list-group-item.far.fa-user.bg-light.mb-2.align-self-center=" User : " + userToSend.firstName + " " + userToSend.lastName 
-            h4.list-group-item.far.fa-envelope.bg-light.mb-2.align-self-center=" User email : "+" "+userToSend.email
-            h4.list-group-item.far.fa-surprise.bg-light.mb-2.align-self-center=" User nickname : "+userToSend.nickname
+div.container
+    div.jumbotron
+        img(src="/images/imgonline-com-ua-Resize-Ke0NAIKQBhPVt.png", alt="image").rounded.float-left.img-thumbnail
+        h4.list-group-item.far.fa-user.bg-light.mb-2.align-self-center=" User : " + userToSend.firstName + " " + userToSend.lastName 
+        h4.list-group-item.far.fa-envelope.bg-light.mb-2.align-self-center=" User email : "+" "+userToSend.email
+        h4.list-group-item.far.fa-surprise.bg-light.mb-2.align-self-center=" User nickname : "+userToSend.nickname
 div.album.py-5.bg-light
     div.container
         div.row
@@ -16,7 +14,12 @@ div.album.py-5.bg-light
                     if temp
                         div.col-md-4
                             div.card.mb-4.shadow-sm
-                                img(src="").card-img-top
+                                each v,i in images
+                                    - let img = v._id.toString()===val.image.toString() ? v.path : "und"
+                                    if img == "und"
+
+                                    else
+                                        img(src="/uploads"+img).card-img-top
                                 div.card-body
                                     h5.card-title=val.title
                                     p.card-text=val.text

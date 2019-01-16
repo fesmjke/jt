@@ -10,7 +10,12 @@ div.album.py-5.bg-light
                 each val,index in p
                     div.col-md-4
                         div.card.mb-4.shadow-sm
-                            img(src="").card-img-top
+                            each v,i in images
+                                - let img = v._id.toString()===val.image.toString() ? v.path : "und"
+                                if img == "und"
+
+                                else
+                                    img(src="/uploads"+img).card-img-top
                             div.card-body
                                 h5.card-title=val.title
                                 p.card-text=val.text

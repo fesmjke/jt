@@ -5,7 +5,7 @@ div.jumbotron.jumbotron-fluid
         h1.display-4="New post"
         p.lead="Here you can add new post"
 div
-    form(method="post")
+    form(method="post",enctype="multipart/form-data") 
         div.input-group.mb-3.col-md-4
             div.input-group-prepend
                 span.input-group-text#basic-addon1
@@ -20,14 +20,22 @@ div
             div.input-group-prepend
                 span.input-group-text="Text"
             textarea(aria-label="Text area",required,name="addText",cols="30",rows="5",placeholder="Post text").form-control
-        div.input-group.col-md-4.justify-content-end
+            
+        div.input-group.mb-3.col-md-4
+            label(for="exampleFormControlFile1")="Add image to your post"
+            input(type="file", name="addImage").form-control-file#exampleFormControlFile1
+                    //- button()="Upload"
+        div.input-group.mb-3.col-md-4.justify-content-end
             button(type="submit").btn.btn-primary.my-1="Publish post"
         div.container
             case st
                 when true
                     div(role="alert").alert.alert-success
                         h4.alert-heading="Well done!"
-                        p="Aww yeah, you successfully add new post!"
+                        if message
+                            p=message  
+                        else
+                            p="Aww yeah, you successfully add new post!"
                         hr
                         p.mb-0="Our congratulations"
                 when false
@@ -38,3 +46,5 @@ div
                         hr
                         p.mb-0="Please try again"
 include ../layout/footer
+
+//enctype="multipart/form-data"
