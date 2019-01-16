@@ -7,25 +7,25 @@ form(method="post").container.h5
     div.form-row
         div.form-group.col-md-3
             label(for="validationServer01")="First name"
-            input(type="text",name="upFirstName",placeholder="First name",required).form-control
+            input(name="upFirstName",type="text",placeholder="First name",required).form-control
         div.form-group.col-md-3
             label(for="inputFirst4")="Last name"
-            input(type="text",name="upLastName",placeholder="Last name",required).form-control
+            input(name="upLastName",type="text",placeholder="Last name",required).form-control
         div.form-group.col-md-4
             label(for="inputNickName4")="NickName"
-            input(type="text",name="upNickName",placeholder="Nickname",required).form-control#inputEmail4
+            input(name="upNickName",type="text",placeholder="Nickname",required).form-control#inputEmail4
             small#passwordHelpBlock.form-text.text-muted="Enter your nickname."
         div.form-group.col-md-4
             label(for="inputEmail4")="Email"
-            input(type="email",name="upEmail",placeholder="email@example.com",required).form-control#inputEmail4
+            input(name="upEmail",type="email",placeholder="email@example.com",required).form-control#inputEmail4
             small#passwordHelpBlock.form-text.text-muted="Enter your active email."
         div.form-group.col-md-3
             label(for="inputPassword4")="Password"
-            input(type="password",name="upPassword",placeholder="Password",aria-describedby="passwordHelpBlock",required).form-control#inputPassword4
+            input(name="upPassword",type="password",aria-describedby="passwordHelpBlock",placeholder="Password",required).form-control#inputPassword4
             small#passwordHelpBlock.form-text.text-muted="Your password must be 6-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji."
         div.form-group.col-md-3 
             label(for="inputPassword4")="Confirm Password"
-            input(type="password",name="upConfirmPassword",placeholder="Type password again",aria-describedby="passwordHelpBlock",required).form-control#inputPassword3
+            input(name="upConfirmPassword",type="password",aria-describedby="passwordHelpBlock",placeholder="Type password again",required).form-control#inputPassword3
             small#passwordHelpBlock.form-text.text-muted="Please enter password again"
     case st
         when true

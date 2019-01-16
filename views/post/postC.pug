@@ -8,7 +8,7 @@ div.jumbotron.jumbotron-fluid.mb-0
             
             li.list-group-item.h3="Post text:"
                 p.font-weight-normal=p.text
-
-            li.list-group-item.h3="Post create: "+p.createdAt
+            - let temp = p.createdAt.toString().slice(0,21)
+            li.list-group-item.h3="Post create: "+temp
 include ../layout/footer
 

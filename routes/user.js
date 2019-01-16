@@ -14,31 +14,34 @@ router.get("/", (req, res) => {
       .then(user => {
         if (user) {
           userToSend = user;
-          models.Post.find({}).then(posts => {
-            postsToSend = posts;
-            models.Image.find({}).then(images =>{
-              res.render("user/profile", {
-                p:postsToSend,
-                userToSend,
-                user: {
-                  nk: user.nickname,
-                  id: userId
-                },
-                images
-              })
+          models.Post.find({})
+            .then(posts => {
+              postsToSend = posts;
+              models.Image.find({})
+                .then(images => {
+                  res.render("user/profile", {
+                    p: postsToSend,
+                    userToSend,
+                    user: {
+                      nk: user.nickname,
+                      id: userId
+                    },
+                    images
+                  });
+                })
+                .catch(err => {
+                  onsole.error("file:user.js find images/" + err);
+                });
+            })
+            .catch(err => {
+              console.error("file:user.js find posts/" + err);
             });
-          });
-          
         } else {
           res.redirect("/");
         }
       })
       .catch(err => {
-        console.log(err);
-        res.redirect("/");
-      })
-      .catch(err => {
-        console.log(err);
+        console.error("file:user.js find user by id" + err);
         res.redirect("/");
       });
   }

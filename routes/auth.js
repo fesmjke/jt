@@ -28,13 +28,15 @@ router.post("/registration", (req, res) => {
       st: false,
       error: "Login length is from 9 to 20 characters!"
     });
-  } else if(u.upNickName.length < 2){
-    res.render("singUP",{
-      st:false,
-      error:"Nickname length is minimum 2 characters!"
+  } else if (u.upNickName.length < 2) {
+    res.render("singUP", {
+      st: false,
+      error: "Nickname length is minimum 2 characters!"
     });
   } else if (
-    !/^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/.test(u.upEmail)
+    !/^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/.test(
+      u.upEmail
+    )
   ) {
     res.render("singUP", {
       st: false,
@@ -49,18 +51,17 @@ router.post("/registration", (req, res) => {
           models.User.create({
             email: login,
             password: hash,
-            nickname : u.upNickName,
+            nickname: u.upNickName,
             firstName: u.upFirstName,
             lastName: u.upLastName
           })
             .then(user => {
-              console.log(user);
               res.render("singUP", {
                 st: true
               });
             })
             .catch(err => {
-              console.log(err);
+              console.error(err);
               res.render("singUP", {
                 st: false,
                 error: "Error,try again later"
@@ -132,7 +133,7 @@ router.post("/login", (req, res) => {
         }
       })
       .catch(err => {
-        console.log(err);
+        console.error(err);
         res.render("singIN", {
           st: false,
           error: "Error,try again later"
@@ -141,14 +142,15 @@ router.post("/login", (req, res) => {
   }
 });
 
-router.get('/logout',(req,res)=>{
-    if(req.session){
-        req.session.destroy(() => {
-            res.redirect('/');
-        });
-    } else {
-        res.redirect('/');
-    }
-})
+router.get("/logout", (req, res) => {
+  if (req.session) {
+    req.session.destroy(() => {
+      req.session = null;
+      res.redirect("/");
+    });
+  } else {
+    res.redirect("/");
+  }
+});
 
 module.exports = router;

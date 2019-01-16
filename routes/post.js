@@ -88,7 +88,7 @@ router.get("/add", (req, res) => {
         }
       })
       .catch(err => {
-        console.log(err);
+        console.error(err);
         res.render("post/add");
       });
   }
@@ -96,7 +96,6 @@ router.get("/add", (req, res) => {
 
 // for add new post
 router.post("/add", upload, (req, res) => {
-  console.log(req.body);
   const userId = req.session.userId;
   const userEmail = req.session.userLogin;
   const title = req.body.addTitle.trim().replace(/ +(?= )/g, "");
@@ -134,7 +133,6 @@ router.post("/add", upload, (req, res) => {
             image: image._id
           })
             .then(post => {
-              console.log("pre upload");
               upload(req, res, err => {
                 let error = "";
                 if (err) {
@@ -146,10 +144,9 @@ router.post("/add", upload, (req, res) => {
                   }
                 }
               });
-              console.log("After upload");
+
               models.User.findById(userId)
                 .then(user => {
-                  console.log("in user promise");
                   let nk = user.nickname;
                   res.render("post/add", {
                     user: {
@@ -174,11 +171,16 @@ router.post("/add", upload, (req, res) => {
                 error: "Error,try again later"
               });
             });
+        })
+        .catch(err => {
+          console.error(err);
+          res.render("post/add", {
+            st: false,
+            error: "Can't find image"
+          });
         });
     }
   }
-  // const id = req.session.userId;
-  // const email = req.session.userLogin;
 });
 
 // to get all posts
@@ -187,25 +189,42 @@ router.get("/posts", (req, res) => {
   const userEmail = req.session.userLogin;
   let nk = "";
   let postAuthor = "";
-  models.User.findById(userId).then(user => {
-    nk = user.nickname;
-  });
 
-  models.Post.find({}).then(posts => {
-    models.User.find({}).then(users => {
-      models.Image.find({}).then(images =>{
-        res.render("post/posts", {
-          p: posts,
-          user: {
-            nk,
-            userId
-          },
-          users,
-          images
-        });
-      })
+  if (!userId || !userEmail) {
+    res.redirect("/");
+  } else {
+    models.User.findById(userId).then(user => {
+      nk = user.nickname;
     });
-  });
+
+    models.Post.find({})
+      .then(posts => {
+        models.User.find({})
+          .then(users => {
+            models.Image.find({})
+              .then(images => {
+                res.render("post/posts", {
+                  p: posts,
+                  user: {
+                    nk,
+                    userId
+                  },
+                  users,
+                  images
+                });
+              })
+              .catch(err => {
+                console.error("/posts can't find images ->" + err);
+              });
+          })
+          .catch(err => {
+            console.error("/posts can't find users ->" + err);
+          });
+      })
+      .catch(err => {
+        console.error("/posts can't find posts ->" + err);
+      });
+  }
 });
 
 //to get current post
@@ -215,10 +234,6 @@ router.get("/cpost/:post", (req, res, next) => {
   const userEmail = req.session.userLogin;
   let nk = "";
 
-  models.User.findById(userId).then(user => {
-    nk = user.nickname;
-  });
-
   if (!url) {
     const err = new Error("Not found!");
     err.status = 404;
@@ -226,22 +241,29 @@ router.get("/cpost/:post", (req, res, next) => {
   } else {
     models.Post.findOne({
       url
-    }).then(post => {
-      if (!post) {
-        const err = new Error("Not found!");
-        err.status = 404;
-        next(err);
-      } else {
-        if (userId || userEmail) {
-          res.render("post/postC", {
-            p: post,
-            user: { id: userId, nk }
-          });
+    })
+      .then(post => {
+        if (!post) {
+          const err = new Error("Not found!");
+          err.status = 404;
+          next(err);
         } else {
-          res.redirect("/");
+          if (userId || userEmail) {
+            models.User.findById(userId).then(user => {
+              nk = user.nickname;
+            });
+            res.render("post/postC", {
+              p: post,
+              user: { id: userId, nk }
+            });
+          } else {
+            res.redirect("/");
+          }
         }
-      }
-    });
+      })
+      .catch(err => {
+        console.error("/cpost/:post can't find post ->" + err);
+      });
   }
 });
 

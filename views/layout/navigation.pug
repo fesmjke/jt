@@ -1,28 +1,24 @@
 nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.sticky-top
     a(href="/").navbar-brand
-        img(src="/images/JT_logo.svg",width="30",height="30",alt="")
+        img(src="/images/JT_logo.svg",alt="",width="30",height="30")
         =""
-    button.navbar-toggler(type="button",data-toggle="collapse",data-target="#navbarSupportedContent",aria-controls="navbarSupportedContent",aria-expanded="false",aria-label="Toggle navigation")
+    button.navbar-toggler(data-target="#navbarSupportedContent",data-toggle="collapse",type="button",aria-controls="navbarSupportedContent",aria-expanded="false",aria-label="Toggle navigation")
         span.navbar-toggler-icon
     div.collapse.navbar-collapse#navbarSupportedContent
         ul.navbar-nav.mr-auto
             li.nav-item.active
                 a(href="/").nav-link="Home"
                     span.sr-only="(current)"
-            li.nav-item
-                a(href="#").nav-link="About"
             if user
                 li.nav-item.dropdown
-                    a(href="#",role="button",data-toggle="dropdown",aria-haspopup="true",aria-expanded="false").nav-link.dropdown-toggle#navbarDropdown="List"
+                    a(data-toggle="dropdown",href="#",role="button",aria-expanded="false",aria-haspopup="true").nav-link.dropdown-toggle#navbarDropdown="Actions"
                     div(aria-labelledby="navbarDropdown").dropdown-menu
                         a(href="/post/posts").dropdown-item="Posts"
                         div.dropdown-divider
                         a(href="/post/add").dropdown-item="Add post"
                         //- div.dropdown-divider
                         //- a(href="#").dropdown-item=""
-            form.form-inline.my-2.my-lg-0
-                input(type="search",placeholder="Search",aria-label="Search").form-control.mr-sm-2
-                button(type="submit").btn.btn-outline-success.my-2.my-sm-0.bg-dark="Search"
+            
         form.form-inline
             unless user
                 ul.nav.justify-content-end

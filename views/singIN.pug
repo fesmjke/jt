@@ -7,10 +7,10 @@ div.container.h5
     form(method="post").px-4.py-4
         div.form-group
             label(for="exampleDropdownFormEmail1")="Email address"
-            input(type="email",name="inEmail",required,placeholder="email@example.com",style="width: 300px;").form-control#exampleDropdownFormEmail1
+            input(name="inEmail",type="email",required,placeholder="email@example.com",style="width: 300px;").form-control#exampleDropdownFormEmail1
         div.form-group
             label(for="exampleDropdownFormPassword1")="Password"
-            input(type="password",name="inPassword",required,placeholder="Password",style="width: 300px;").form-control#exampleDropdownFormPassword1
+            input(name="inPassword",type="password",required,placeholder="Password",style="width: 300px;").form-control#exampleDropdownFormPassword1
         button(type="submit").btn.btn-primary="Sing in"
     case st
         when true

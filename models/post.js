@@ -20,9 +20,9 @@ const post = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User"
     },
-    image:{
-      type:Schema.Types.ObjectId,
-      ref: 'Image'
+    image: {
+      type: Schema.Types.ObjectId,
+      ref: "Image"
     }
   },
   {

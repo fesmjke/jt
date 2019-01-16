@@ -31,12 +31,11 @@ app.set("view engine", "pug");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static("public"));
-app.use('/uploads', express.static('uploads'));
+app.use("/uploads", express.static("uploads"));
 // routers
 app.use("/join", routs.auth);
 app.use("/post", routs.post);
 app.use("/user", routs.user);
-app.use("/upload", routs.upload);
 
 app.get("/", (req, res) => {
   const id = req.session.userId;
@@ -61,10 +60,6 @@ app.get("/", (req, res) => {
       console.log(err);
       res.render("index");
     });
-});
-
-app.get("/dev/c", (req, res) => {
-  res.render("layout/carousel");
 });
 
 //catch errors

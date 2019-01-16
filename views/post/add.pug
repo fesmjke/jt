@@ -10,20 +10,20 @@ div
             div.input-group-prepend
                 span.input-group-text#basic-addon1
                     i.fas.fa-sm.fa-signature
-            input(type="text",placeholder="title",required,name="addTitle",aria-label="tag",aria-describedby="basic-addon1").form-control
+            input(name="addTitle",type="text",aria-describedby="basic-addon1",aria-label="tag",placeholder="title",required).form-control
         div.input-group.mb-3.col-md-4
             div.input-group-prepend
                 span.input-group-text#basic-addon1
                     i.fas.fa-sm.fa-hashtag
-            input(type="text",placeholder="tag",required,name="addTag",aria-label="tag",aria-describedby="basic-addon1").form-control
+            input(name="addTag",type="text",aria-describedby="basic-addon1",aria-label="tag",placeholder="tag",required).form-control
         div.input-group.mb-3.col-md-4
             div.input-group-prepend
                 span.input-group-text="Text"
-            textarea(aria-label="Text area",required,name="addText",cols="30",rows="5",placeholder="Post text").form-control
+            textarea(name="addText",aria-label="Text area",required,cols="30",rows="5",placeholder="Post text").form-control
             
         div.input-group.mb-3.col-md-4
             label(for="exampleFormControlFile1")="Add image to your post"
-            input(type="file", name="addImage").form-control-file#exampleFormControlFile1
+            input(name="addImage", type="file", required).form-control-file#exampleFormControlFile1
                     //- button()="Upload"
         div.input-group.mb-3.col-md-4.justify-content-end
             button(type="submit").btn.btn-primary.my-1="Publish post"

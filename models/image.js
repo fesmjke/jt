@@ -10,7 +10,7 @@ const image = new Schema(
     path: {
       type: String,
       required: true
-    },
+    }
   },
   {
     timestamps: true
